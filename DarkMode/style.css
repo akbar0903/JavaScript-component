@@ -1,0 +1,176 @@
+:root {
+  --primary-color: oklch(62.3% 0.214 259.815);
+  --color-light: oklch(100% 0.00011 271.152);
+  --gray-color: oklch(92.9% 0.013 255.508);
+  --gray-light-1: oklch(70.7% 0.022 261.325);
+  --main-text-color: oklch(20.8% 0.042 265.755);
+  --header-bg-color: rgba(255, 255, 255, 0.7);
+}
+
+:root[data-theme='dark'] {
+  --primary-color: oklch(70.3% 0.214 259.815);
+  --color-light: oklch(15% 0.00011 271.152);
+  --gray-color: oklch(30.9% 0.013 255.508);
+  --main-text-color: oklch(98.5% 0.002 247.839);
+  --header-bg-color: rgba(0, 0, 0, 0.7);
+}
+
+/* 
+为Transition API禁用动画
+默认情况下，有淡入淡出动画。
+所以我们需要禁用它，以防止与自定义动画冲突。
+*/
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+[data-theme='dark']::view-transition-old(root) {
+  z-index: 9999;
+}
+[data-theme='dark']::view-transition-new(root) {
+  z-index: 1;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-light);
+  color: var(--main-text-color);
+}
+
+/*******************************
+  General Styles
+********************************/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heading-secondary {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+/*******************************
+  Header Styles
+********************************/
+.header {
+  position: sticky;
+  top: 0;
+  padding: 0 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--header-bg-color);
+  backdrop-filter: blur(7px);
+}
+
+.navbar {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.logo {
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  color: var(--primary-color);
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+}
+
+.nav-link:link,
+.nav-link:visited {
+  position: relative;
+  display: inline-block;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link:active {
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  color: var(--main-text-color);
+}
+
+.theme-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--color-light);
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/*******************************
+  Main Content Styles
+********************************/
+.main {
+  flex: 1;
+  padding: 0 16px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+p {
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/*******************************
+  Footer Styles
+********************************/
+.footer {
+  background-color: var(--color-light);
+  border-top: 1px solid var(--gray-color);
+}
+
+.footer-text {
+  padding: 16px 0;
+  margin-bottom: 0;
+  text-align: center;
+  color: var(--gray-light-1);
+}
+
+/*******************************
+  Media Queries
+********************************/
